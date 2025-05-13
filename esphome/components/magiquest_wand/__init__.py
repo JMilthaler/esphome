@@ -1,8 +1,8 @@
+from esphome import pins
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome.const import CONF_ID
+from esphome.const import CONF_ID, CONF_PIN
 
-CONF_PIN = "pin"
 CONF_WANDID = "wand_id"
 
 magiquest_wand_ns = cg.esphome_ns.namespace("magiquest_wand")
@@ -11,7 +11,7 @@ MagiquestWand = magiquest_wand_ns.class_("MagiquestWand", cg.Component)
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(): cv.declare_id(MagiquestWand),
-        cv.Required(CONF_PIN): cv.positive_int,
+        cv.Required(CONF_PIN): cv.All(pins.internal_gpio_input_pin_schema),
         cv.Required(CONF_WANDID): cv.positive_int,
     }
 )

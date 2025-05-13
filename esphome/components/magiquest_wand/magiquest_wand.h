@@ -11,6 +11,6 @@ class MagiquestBinarySensor : public Component {
   void set_wandid(int wandId) { this->wand_id_ = wandId; }
 
  protected:
-  int pin_{0};
+  InternalGPIOPin *pin_;
   int wand_id_{0x0};
 }

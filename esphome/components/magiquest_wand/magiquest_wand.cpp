@@ -25,7 +25,7 @@ void MagiquestBinarySensor::loop() {
 
 void MagiquestBinarySensor::dump_config() {
   ESP_LOGCONFIG(TAG, "Magiquest Wand");
-  ESP_LOGCONFIG(TAG, "pin = %s" this->pin_);
+  LOG_PIN(TAG, "pin = ", this->pin_);
   ESP_LOGCONFIG(TAG, "wand id = 0x%08", wandid_);
 }
 
