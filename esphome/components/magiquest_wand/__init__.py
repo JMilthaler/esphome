@@ -22,7 +22,8 @@ async def to_code(config):
 
     await cg.register_component(var, config)
 
-    cg.add(var.set_pin(config[CONF_PIN]))
+    await cg.gpio_pin_expression(config[CONF_PIN])
+    cg.add(var.set_pin(CONF_PIN))
     cg.add(var.set_wandid(config[CONF_WANDID]))
     cg.add_library(
         name="RemoteIR",
