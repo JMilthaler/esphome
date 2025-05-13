@@ -5,7 +5,7 @@ from esphome.const import CONF_ID
 CONF_PIN = "pin"
 CONF_WANDID = "wand_id"
 
-magiquest_wand_ns = cg.esphome.namespace("magiquest_wand")
+magiquest_wand_ns = cg.esphome_ns.namespace("magiquest_wand")
 MagiquestWand = magiquest_wand_ns.class_("MagiquestWand", cg.Component)
 
 CONFIG_SCHEMA = cv.Schema(
