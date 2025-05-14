@@ -47,9 +47,13 @@ optional<MagiQuestData> MagiQuestProtocol::decode(RemoteReceiveData src) {
       .wand_id = 0,
   };
   // Two start bits
-  if (!src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE) ||
-      !src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE)) {
+  if (!src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE)) {
     ESP_LOGI(TAG, "First Exit");
+    return {};
+  }
+
+  if (!src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE)) {
+    ESP_LOGI(TAG, "Second Exit");
     return {};
   }
 
