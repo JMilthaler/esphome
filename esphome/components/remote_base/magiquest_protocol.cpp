@@ -76,7 +76,7 @@ optional<MagiQuestData> MagiQuestProtocol::decode(RemoteReceiveData src) {
       ESP_LOGI(TAG, "Loop 2 if 2");
       data.magnitude &= ~mask;
     } else {
-      ESP_LOGI(TAG, "Loop 2 EXIT")
+      ESP_LOGI(TAG, "Loop 2 EXIT");
       return {};
     }
   }
