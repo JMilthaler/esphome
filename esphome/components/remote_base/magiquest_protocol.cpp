@@ -49,29 +49,38 @@ optional<MagiQuestData> MagiQuestProtocol::decode(RemoteReceiveData src) {
   // Two start bits
   if (!src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE) ||
       !src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE)) {
+    ESP_LOGI(TAG, "First Exit");
     return {};
   }
 
   for (uint32_t mask = 1 << 31; mask; mask >>= 1) {
+    ESP_LOGI(TAG, "For Loop 1 iteration %i", mask);
     if (src.expect_item(MAGIQUEST_ONE_MARK, MAGIQUEST_ONE_SPACE)) {
+      ESP_LOGI(TAG, "Loop 1 if 1");
       data.wand_id |= mask;
     } else if (src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE)) {
+      ESP_LOGI(TAG, "Loop 1 if 2");
       data.wand_id &= ~mask;
     } else {
+      ESP_LOGI(TAG, "Loop 1 EXIT");
       return {};
     }
   }
 
   for (uint16_t mask = 1 << 15; mask; mask >>= 1) {
+    ESP_LOGI(TAG, "For Loop 2 iteration %i", mask);
     if (src.expect_item(MAGIQUEST_ONE_MARK, MAGIQUEST_ONE_SPACE)) {
+      ESP_LOGI(TAG, "Loop 2 if 1");
       data.magnitude |= mask;
     } else if (src.expect_item(MAGIQUEST_ZERO_MARK, MAGIQUEST_ZERO_SPACE)) {
+      ESP_LOGI(TAG, "Loop 2 if 2");
       data.magnitude &= ~mask;
     } else {
+      ESP_LOGI(TAG, "Loop 2 EXIT")
       return {};
     }
   }
-
+  ESP_LOGI(TAG, "Made it");
   src.expect_mark(MAGIQUEST_UNIT);
   return data;
 }
